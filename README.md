@@ -1,1 +1,2 @@
-- [ ] Data types
+- [X] Data types
+- [ ] Loops
