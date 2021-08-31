@@ -13,12 +13,18 @@ export class UserListView{
         return this.dom.searchInp.value;
     }
 
-    renderUsers = data => {    
-        console.log(data);  
+    renderUsers = (data, listener) => {    
         this.dom.userTable.innerHTML = '';
         const tableRows = data.map(this.getUserHTML).join('');
         this.dom.userTable.insertAdjacentHTML('afterbegin', tableRows);
+
+        this.addListeners(listener);
     }   
+
+    addListeners = (listener) => {
+        document.querySelectorAll('.user_edit_btn').forEach(btn => btn.addEventListener('click', listener));
+        
+    }
 
     getStatusStyleName = status => {
         const statusMap = {
@@ -69,7 +75,7 @@ export class UserListView{
                 ${ roleName }
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                <a href="#" class="text-indigo-600 hover:text-indigo-900 user_edit_btn">Edit</a>
             </td>
         </tr>
         `;
